@@ -1,0 +1,47 @@
+@import "header.css";
+@import "footer.css";
+
+
+.img{ 
+    width: 225,7px;
+    height: 150px;
+}
+
+#production{
+display: flex;
+flex-direction:column ;
+
+}
+
+#prod{
+display: flex;
+margin-left: auto;
+margin-right: auto;
+
+}
+
+#photo{
+    padding:20px;
+}
+
+#cote{
+    padding:20px;
+}
+
+#lentilles{
+    margin-top:20px;
+
+}
+
+#bouton{
+
+    margin-left: auto;
+    margin-right: auto;
+    background-color: grey;
+   
+  
+
+
+}
+
+
