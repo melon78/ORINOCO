@@ -24,9 +24,13 @@ const price = document.createElement("p");
 const description = document.createElement("p");
 const lienProduit = document.createElement("a");
 const selection = document.createElement("select");
-const choix = document.createElement("label");
+const label = document.createElement("label");
 const br = document.createElement("br");
-const bouton = document.createElement("button")
+const formulaire = document.createElement("form");
+const choix = document.createElement("input");
+const firstoption = document.createElement("option");
+
+
 
 //définition des attibuts
 section.setAttribute("id","prod");
@@ -35,11 +39,13 @@ div2.setAttribute("id","cote");
 image.setAttribute("src",data.imageUrl);
 image.setAttribute("class","img");
 selection.setAttribute("id","lentilles");
-selection.setAttribute("name","lentilles");
 div3.setAttribute("type","button")
 div3.setAttribute("id","bouton");
-
-
+formulaire.setAttribute("name","form1");
+formulaire.setAttribute("id","formu")
+choix.setAttribute("type","submit");
+choix.setAttribute("value","Ajouter au Panier");
+firstoption.setAttribute("value","");
 
 
 
@@ -49,8 +55,8 @@ description.textContent= data.description;
 name.textContent = data.name;
 price.textContent = data.price/100+"€";
 lienProduit.textContent ="";
-choix.textContent = "Personalisez votre objectif :";
-bouton.textContent = "Ajouter au panier";
+label.textContent = "Personalisez votre objectif :";
+
 
 
 // affichage dans la page dans cet ordre. 
@@ -60,42 +66,52 @@ div2.appendChild(name);
 div2.appendChild(price);
 div2.appendChild(description);
 div2.appendChild(lienProduit);
-div2.appendChild(choix);
+div2.appendChild(label);
 div2.appendChild(br);
-div2.appendChild(selection);
-div3.appendChild(bouton);
+div2.appendChild(formulaire);
+formulaire.appendChild(selection);
 section.appendChild(div2);
 article.appendChild(section);
 article.appendChild(div3);
-
-
-
+selection.appendChild(firstoption);
+formulaire.appendChild(choix);
 
 const selectionLentilles = document.getElementById("lentilles");
 
-    data.lenses.forEach(objectif =>{
 
-    const option = document.createElement("option");
-    selectionLentilles.appendChild(option);
-    option.textContent= objectif;
-    option.setAttribute("value","Type de lentilles")
+      data.lenses.forEach(objectif => {
+
+         const option = document.createElement("option");
+         selectionLentilles.appendChild(option);
+         option.textContent=objectif;
+         option.setAttribute("value",objectif);
+     });
 
 
-    bouton.addEventListener("click",()=>{
-        localStorage.setItem("idArticleSelectionne",data_id);
-        location.href="panier.html";});
+   
 
-        
-    bouton.addEventListener("click",()=>{
-        localStorage.setItem("lentilles",option.textContent);
-        location.href="panier.html";});
 
-     
+document.getElementById("lentilles").addEventListener("change",function (e){
+console.log("type de lentille : " +e.target.value);
+})
 
-}); 
+document.getElementById("lentilles").addEventListener("change",function (e){
+localStorage.setItem("type de lentilles",e.target.value);});
+
+
+
+choix.addEventListener("click",()=>{
+    location.href="panier.html"
+    event.preventDefault();
+})
 
 
 })
+
+
 })
+   
+; 
+
 
 
