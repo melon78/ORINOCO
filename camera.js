@@ -29,6 +29,7 @@ const br = document.createElement("br");
 const formulaire = document.createElement("form");
 const choix = document.createElement("input");
 const firstoption = document.createElement("option");
+//const modele = document.createElement("p");
 
 
 
@@ -56,10 +57,12 @@ name.textContent = data.name;
 price.textContent = data.price/100+"€";
 lienProduit.textContent ="";
 label.textContent = "Personalisez votre objectif :";
+//modele.textecontent ="Modèle:"
 
 
 
 // affichage dans la page dans cet ordre. 
+
 section.appendChild(produit);
 produit.appendChild(image);
 div2.appendChild(name);

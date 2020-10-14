@@ -1,5 +1,6 @@
 @import "header.css";
 @import "footer.css";
+@import "mailbox.css";
 
 
 .img{ 
@@ -39,9 +40,15 @@ margin-right: auto;
     margin-right: auto;
     background-color: grey;
    
-  
-
-
 }
 
 
+#bloc1{
+    display: flex;
+
+}
+
+tr{
+
+    padding: 20px;
+}
