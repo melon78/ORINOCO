@@ -70,6 +70,7 @@ fetch(url + "/" +localStorage.getItem("idArticleSelectionne"))
     nomtext.setAttribute("name","nom");
     nomtext.setAttribute("required","required");
     nomtext.setAttribute("id","nom");
+    nomtext.setAttribute("value","");
     prenom.setAttribute("for","prénom");
     prenomtext.setAttribute("type","text");
     prenomtext.setAttribute("name","prénom");
@@ -99,7 +100,7 @@ fetch(url + "/" +localStorage.getItem("idArticleSelectionne"))
     mailtext.setAttribute("id","mail");
     valid.setAttribute("type","submit");
     annule.setAttribute("type","reset");
-    formulaire.setAttribute("id","box");
+    formulaire.setAttribute("id","myForm");
     section1.setAttribute("id","bloc1");
     quantite.setAttribute("type","number");
     quantite.setAttribute("oninput","")
@@ -108,6 +109,8 @@ fetch(url + "/" +localStorage.getItem("idArticleSelectionne"))
     quantite.setAttribute("max","5");
     tdtable8.setAttribute("id","totalprix");
     table.setAttribute("id","tableau");
+    tdtable4.setAttribute("id","modele");
+    tdtable5.setAttribute("id","quant");
 
     // affectation des données
 
@@ -188,6 +191,7 @@ fetch(url + "/" +localStorage.getItem("idArticleSelectionne"))
     quantite.addEventListener("click",()=> {
     console.log("quantite = " + localStorage.getItem("quantité"));
     var chiffre = localStorage.getItem("quantité")
+    tdtable5.setAttribute("value",chiffre);
     console.log(chiffre);
     var resultat = chiffre*data.price/100;
     console.log(resultat);   
@@ -197,16 +201,29 @@ fetch(url + "/" +localStorage.getItem("idArticleSelectionne"))
     localStorage.setItem("totalisation",resultat+' €');
 
        })
-
-       // structure du tableau 
-
-       var information = {
-        'contact' : [],
-        'produit' : [],
+       
       
-    };
+
+       var modele = document.getElementById("modele");
+       var quant  = document.getElementById("quant");
+
+       
+
+       
 
 
+       // création des 2 tableaux. 
+
+     
+
+   
+
+    //incrémentation  de la table contact
+    
+
+
+    
+/*
     // Traitement des coordonnées. 
     // stockage des informations saisie par l'utilisateur dans le localStorage ( 6 champs)
 
@@ -256,22 +273,92 @@ fetch(url + "/" +localStorage.getItem("idArticleSelectionne"))
 
     console.log(contact);
 
-    console.log(JSON.stringify(information));
+    //console.log(JSON.stringify(information));
 
-      // console.log(JSON.stringify({"nom":data.price,"prenom":"","adresse":"","code postal":""}));
+    // console.log(JSON.stringify({"nom":data.price,"prenom":"","adresse":"","code postal":""}));
 
 
-
+*/
 
 
 
     valid.addEventListener("click",()=>{
+      
+     
+      
+       if(formulaire.nom.value==""){
+         alert("Vous avez oublié de remplir un champs obligatoire");
+         
+       }
+       else if (formulaire.prenom.value==""){
+         alert("Vous avez oublie de remplir un champs obligatoire")
+       }
+       else if (formulaire.adresse.value==""){
+         alert("Vous avez oublie de remplir un champs obligatoire")
+       }
+       else if (formulaire.ville.value==""){
+        alert("Vous avez oublie de remplir un champs obligatoire")
+       }
+       else if (formulaire.code.value==""){
+        alert("Vous avez oublie de remplir un champs obligatoire")
+       }
+       else if (formulaire.mail.value==""){
+        alert("Vous avez oublie de remplir un champs obligatoire")
+       }
+       else
+       {
+
+     
+        var contact = JSON.stringify({"nom":formulaire.nom.value,
+                                      "prenom":formulaire.prenom.value,
+                                      "adresse":formulaire.adresse.value,
+                                      "ville":formulaire.ville.value,
+                                      "code":formulaire.code.value,
+                                      "mail":formulaire.mail.value    
+      })
 
 
+      var prixTotal = localStorage.getItem("totalisation");
+      var quantiteFinal = localStorage.getItem("quantité");
 
-        location.href="confirmation.html"
-        Event.preventDefault();
+
+      var produit = JSON.stringify({"modele":modele.innerText,
+                                    "quantiteFinal":quantiteFinal,
+                                    "prixtotale": prixTotal,
+                                 
+})
+
+
+    
+      var panier = [
+        [contact],
+        [produit]
+      ]
+     
+      alert(panier)
+
+     fetch(localStorage.setItem("panier",panier),{
+       method:'POST',
+       headers:{
+         'Content-Type':'application/json ; charset=UTF-8'
+       },
+       body:panier
+     })
+     .then(function(response){
+      return response.json()
+     })
+     .then(function(data){
+       alert(data);
+       location.href="confirmation.html"
+     })
+
+       }
+      
     })
+
+
+
+
 
 
 
